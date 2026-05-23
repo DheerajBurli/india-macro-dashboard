@@ -1,14 +1,10 @@
-// ── 10-year monthly labels: Jan 2015 → Dec 2024 ─────────────────────────
+// ── 10-year monthly labels: Jun 2016 → May 2026 ─────────────────────────
 const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 export const MONTHLY_10Y = [];
-for (let yr = 2015; yr <= 2024; yr++) {
-  for (const mo of MONTHS_SHORT) MONTHLY_10Y.push(`${mo} ${yr}`);
-}
+{ let yr = 2016, mi = 5; for (let i = 0; i < 120; i++) { MONTHLY_10Y.push(`${MONTHS_SHORT[mi]} ${yr}`); if (++mi === 12) { mi = 0; yr++; } } }
 
 export const QUARTERLY_10Y = [
-  'Q1 FY15','Q2 FY15','Q3 FY15','Q4 FY15',
-  'Q1 FY16','Q2 FY16','Q3 FY16','Q4 FY16',
-  'Q1 FY17','Q2 FY17','Q3 FY17','Q4 FY17',
+  'Q2 FY17','Q3 FY17','Q4 FY17',
   'Q1 FY18','Q2 FY18','Q3 FY18','Q4 FY18',
   'Q1 FY19','Q2 FY19','Q3 FY19','Q4 FY19',
   'Q1 FY20','Q2 FY20','Q3 FY20','Q4 FY20',
@@ -16,7 +12,9 @@ export const QUARTERLY_10Y = [
   'Q1 FY22','Q2 FY22','Q3 FY22','Q4 FY22',
   'Q1 FY23','Q2 FY23','Q3 FY23','Q4 FY23',
   'Q1 FY24','Q2 FY24','Q3 FY24','Q4 FY24',
-  'Q1 FY25','Q2 FY25',
+  'Q1 FY25','Q2 FY25','Q3 FY25','Q4 FY25',
+  'Q1 FY26','Q2 FY26','Q3 FY26','Q4 FY26',
+  'Q1 FY27',
 ];
 
 const nulls = (n) => Array(n).fill(null);
@@ -41,7 +39,7 @@ export const CONSUMPTION = [
   { id:11, name:'Mobile Phone Sales',            source:'IDC / Counterpoint',  freq:'Monthly',     lag:'4 wks', unit:'mn units',color:'#06bcd4', description:'IDC/Counterpoint smartphone and feature phone shipments into India — consumer electronics spending and technology-led discretionary demand indicator.',                                     series:{labels:MONTHLY_10Y,    actuals:nulls(120)}, prediction:dummyPred('mn units', 'Gradient Boost') },
   { id:12, name:'Non-Suburban Rail Traffic',     source:'Indian Railways',     freq:'Monthly',     lag:'2 wks', unit:'mn pax',  color:'#06bcd4', description:'Indian Railways non-suburban (long-distance) passenger traffic — measures inter-city travel reflecting rural and middle-income consumer mobility and discretionary spending.',            series:{labels:MONTHLY_10Y,    actuals:nulls(120)}, prediction:dummyPred('mn pax',  'Holt-Winters') },
   { id:13, name:'Air Passenger Traffic',         source:'DGCA',                freq:'Monthly',     lag:'3 wks', unit:'mn pax',  color:'#06bcd4', description:'DGCA total air passenger traffic with emphasis on secondary airports — upper-income services consumption and business travel proxy; secondary estimate.',                                   series:{labels:MONTHLY_10Y,    actuals:nulls(120)}, prediction:dummyPred('mn pax',  'Holt-Winters') },
-  { id:14, name:'E-Commerce GMV',                source:'IAMAI',               freq:'Quarterly',   lag:'8 wks', unit:'₹ bn',   color:'#06bcd4', description:'IAMAI/Redseer gross merchandise value across B2C e-commerce platforms — urban digital consumption channel; secondary estimate with inherent methodological uncertainty.',              series:{labels:QUARTERLY_10Y,  actuals:nulls(42)},  prediction:dummyPred('₹ bn',    'Gradient Boost') },
+  { id:14, name:'E-Commerce GMV',                source:'IAMAI',               freq:'Quarterly',   lag:'8 wks', unit:'₹ bn',   color:'#06bcd4', description:'IAMAI/Redseer gross merchandise value across B2C e-commerce platforms — urban digital consumption channel; secondary estimate with inherent methodological uncertainty.',              series:{labels:QUARTERLY_10Y,  actuals:nulls(40)},  prediction:dummyPred('₹ bn',    'Gradient Boost') },
 ];
 
 // ── INVESTMENT (14) ──────────────────────────────────────────────────────
@@ -70,7 +68,7 @@ export const GOVERNMENT = [
   { id:32, name:'NHAI Highway Construction',            source:'NHAI',         freq:'Monthly',     lag:'3 wks', unit:'km/mo',   color:'#eda820', description:'National Highways Authority kilometres awarded and constructed per month — flagship government capex execution metric within the National Infrastructure Pipeline.',             series:{labels:MONTHLY_10Y,    actuals:nulls(120)}, prediction:dummyPred('km/mo',   'Holt-Winters') },
   { id:33, name:'MGNREGA Person-Days',                  source:'MoRD',         freq:'Monthly',     lag:'1 wk',  unit:'mn p-days',color:'#eda820', description:'Ministry of Rural Development MGNREGS employment generated in person-days — rural welfare spending indicator and automatic stabiliser for farm-income shocks.',               series:{labels:MONTHLY_10Y,    actuals:nulls(120)}, prediction:dummyPred('mn p-d',  'ARIMA') },
   { id:34, name:'MGNREGA Expenditure',                  source:'MoRD',         freq:'Monthly',     lag:'1 wk',  unit:'₹ Cr',   color:'#eda820', description:"Actual MGNREGS scheme expenditure released by MoRD — fiscal cost of rural employment guarantee and demand-side income support for India's rural consumption base.",         series:{labels:MONTHLY_10Y,    actuals:nulls(120)}, prediction:dummyPred('₹ Cr',    'ARIMA') },
-  { id:35, name:'State Govt Capex',                     source:'RBI',          freq:'Quarterly',   lag:'8 wks', unit:'₹ L.Cr', color:'#06bcd4', description:'RBI consolidated state government capital outlay adjusted for central back-to-back loan double-counting — state-level infrastructure investment complement to central capex.',   series:{labels:QUARTERLY_10Y,  actuals:nulls(42)},  prediction:dummyPred('₹ L.Cr',  'Lasso Reg') },
+  { id:35, name:'State Govt Capex',                     source:'RBI',          freq:'Quarterly',   lag:'8 wks', unit:'₹ L.Cr', color:'#06bcd4', description:'RBI consolidated state government capital outlay adjusted for central back-to-back loan double-counting — state-level infrastructure investment complement to central capex.',   series:{labels:QUARTERLY_10Y,  actuals:nulls(40)},  prediction:dummyPred('₹ L.Cr',  'Lasso Reg') },
   { id:36, name:'Defence Capital Outlay',               source:'CGA',          freq:'Monthly',     lag:'3 wks', unit:'₹ L.Cr', color:'#06bcd4', description:'CGA Ministry of Defence capital expenditure — covers equipment procurement, platform modernisation and military infrastructure; significant public capex multiplier.',           series:{labels:MONTHLY_10Y,    actuals:nulls(120)}, prediction:dummyPred('₹ L.Cr',  'Ridge Reg') },
 ];
 
@@ -78,7 +76,7 @@ export const GOVERNMENT = [
 export const NET_EXPORTS = [
   { id:37, name:'Merchandise Exports',      source:'DGCI&S',           freq:'Monthly',     lag:'2 wks', unit:'$bn',     color:'#ed4545', description:'DGCI&S total merchandise exports FOB covering all commodity groups — flash release provides the earliest monthly trade signal for external demand assessment.',                         series:{labels:MONTHLY_10Y,    actuals:nulls(120)}, prediction:dummyPred('$bn',     'Gradient Boost') },
   { id:38, name:'Non-Oil Non-Gold Imports', source:'DGCI&S',           freq:'Monthly',     lag:'2 wks', unit:'$bn',     color:'#ed4545', description:'Merchandise imports stripped of crude oil and gold — reveals underlying domestic demand for industrial inputs and consumption goods sourced from abroad.',                           series:{labels:MONTHLY_10Y,    actuals:nulls(120)}, prediction:dummyPred('$bn',     'ARIMA') },
-  { id:39, name:'Services Exports',         source:'RBI BoP',          freq:'Quarterly',   lag:'8 wks', unit:'$bn',     color:'#ed4545', description:"RBI Balance of Payments software, IT-BPM and other services exports — India's largest and fastest-growing export category, with quarterly BoP release.",                        series:{labels:QUARTERLY_10Y,  actuals:nulls(42)},  prediction:dummyPred('$bn',     'Trend+LSTM') },
+  { id:39, name:'Services Exports',         source:'RBI BoP',          freq:'Quarterly',   lag:'8 wks', unit:'$bn',     color:'#ed4545', description:"RBI Balance of Payments software, IT-BPM and other services exports — India's largest and fastest-growing export category, with quarterly BoP release.",                        series:{labels:QUARTERLY_10Y,  actuals:nulls(40)},  prediction:dummyPred('$bn',     'Trend+LSTM') },
   { id:40, name:'INR / USD Exchange Rate',  source:'RBI',              freq:'Monthly',     lag:'0',     unit:'₹ per $', color:'#ed4545', description:'RBI reference exchange rate — governs export competitiveness, import cost pass-through and rupee-denominated GDP translation for external sector analysis.',                       series:{labels:MONTHLY_10Y,    actuals:nulls(120)}, prediction:dummyPred('₹/$',     'GARCH+AR') },
   { id:41, name:'Global Composite PMI',     source:'S&P Global',       freq:'Monthly',     lag:'1 day', unit:'Index',   color:'#ed4545', description:"J.P.Morgan/S&P Global World Composite PMI — external demand signal for India's merchandise and services exports; readings above 50 indicate expansion.",                        series:{labels:MONTHLY_10Y,    actuals:nulls(120)}, prediction:dummyPred('Index',   'Global Macro') },
   { id:42, name:'Indian Basket Crude Price',source:'PPAC',             freq:'Monthly',     lag:'0',     unit:'$/bbl',   color:'#ed4545', description:"PPAC Indian crude oil basket (blend of Oman, Dubai and Brent) price — directly determines India's petroleum import bill and current account position.",                       series:{labels:MONTHLY_10Y,    actuals:nulls(120)}, prediction:dummyPred('$/bbl',   'Futures+ARIMA') },
@@ -96,7 +94,7 @@ export const CROSS_CUTTING = [
   { id:50, name:'Nighttime Light Index',     source:'NOAA / NASA',    freq:'Monthly',     lag:'3 wks', unit:'Index',   color:'#8b5cf6', tags:['C','I'],            description:'NOAA VIIRS satellite nighttime lights aggregated to the India grid — alternative GDP nowcast proxy that captures economic activity not detected by traditional surveys.', series:{labels:MONTHLY_10Y,   actuals:nulls(120)}, prediction:dummyPred('Index',   'CNN+ARIMA') },
   { id:51, name:'M3 Money Supply',           source:'RBI',            freq:'Monthly',     lag:'2 wks', unit:'% YoY',   color:'#8b5cf6', tags:['C','I','G'],        description:"RBI broad money M3 growth — monetary transmission channel feeding consumption credit, investment financing and the government's deficit monetisation pathway.",             series:{labels:MONTHLY_10Y,   actuals:nulls(120)}, prediction:dummyPred('%',       'VAR Model') },
   { id:52, name:'Credit-Deposit Ratio',      source:'RBI',            freq:'Monthly',     lag:'2 wks', unit:'Ratio',   color:'#8b5cf6', tags:['C','I'],            description:'Scheduled commercial bank credit-to-deposit ratio — systemic credit deployment intensity affecting both consumption credit availability and investment financing conditions.',  series:{labels:MONTHLY_10Y,   actuals:nulls(120)}, prediction:dummyPred('Ratio',   'Ridge Reg') },
-  { id:53, name:'Corporate Earnings Growth', source:'BSE / NSE',      freq:'Quarterly',   lag:'3 wks', unit:'% YoY',   color:'#8b5cf6', tags:['C','I'],            description:'BSE 500 aggregate net profit growth — reflects consumer demand trends via revenues, investment returns via margins and government spending effects on corporate earnings.', series:{labels:QUARTERLY_10Y, actuals:nulls(42)},  prediction:dummyPred('%',       'LSTM') },
+  { id:53, name:'Corporate Earnings Growth', source:'BSE / NSE',      freq:'Quarterly',   lag:'3 wks', unit:'% YoY',   color:'#8b5cf6', tags:['C','I'],            description:'BSE 500 aggregate net profit growth — reflects consumer demand trends via revenues, investment returns via margins and government spending effects on corporate earnings.', series:{labels:QUARTERLY_10Y, actuals:nulls(40)},  prediction:dummyPred('%',       'LSTM') },
 ];
 
 export const SECTIONS = [
