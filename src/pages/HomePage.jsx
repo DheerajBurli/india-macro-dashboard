@@ -8,7 +8,7 @@ export default function HomePage({ onOpen }) {
     <div className="home-page anim-fade">
       <div className="home-header">
         <div className="home-title">GDP Component Tracker</div>
-        <div className="home-sub">40 high-frequency indicators · 5 GDP components · Quarterly ML forecasts</div>
+        <div className="home-sub">53 high-frequency indicators · 5 GDP components · Quarterly ML forecasts</div>
       </div>
 
       <div className="tiles-grid">
